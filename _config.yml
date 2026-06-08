@@ -1,0 +1,21 @@
+title: Heesun Kim
+tagline: Personal homepage
+description: >-
+  Personal homepage of Heesun Kim — about, work, and writing.
+author: Heesun Kim
+email: heesuri16@gmail.com
+url: "https://heesunkiminsg.github.io"
+baseurl: ""
+
+github_username: heesunkiminsg
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

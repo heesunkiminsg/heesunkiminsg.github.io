@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<section class="hero">
+  <h1>Hi, I'm Heesun Kim.</h1>
+  <p class="lead">Welcome to my corner of the web — a place for what I'm working on and what I'm thinking about.</p>
+</section>
+
+<section id="about" class="section">
+  <h2>About</h2>
+  <p>
+    I'm Heesun Kim. <em>(Add a short bio here — who you are, what you do, and
+    what you care about. A couple of sentences is plenty.)</em>
+  </p>
+</section>
+
+<section id="work" class="section">
+  <h2>Work &amp; Projects</h2>
+  <ul class="project-list">
+    <li>
+      <a href="#">Project One</a>
+      <span class="project-desc">A short, one-line description of the project.</span>
+    </li>
+    <li>
+      <a href="#">Project Two</a>
+      <span class="project-desc">What it is and why it matters.</span>
+    </li>
+    <li>
+      <a href="#">Project Three</a>
+      <span class="project-desc">Replace these with your real work.</span>
+    </li>
+  </ul>
+</section>
+
+<section id="writing" class="section">
+  <h2>Latest Writing</h2>
+  <ul class="post-list">
+    {% for post in site.posts limit:3 %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ '/blog/' | relative_url }}">See all posts →</a></p>
+</section>
+
+<section id="contact" class="section">
+  <h2>Contact &amp; Links</h2>
+  <ul class="links">
+    <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+    <li><a href="https://github.com/{{ site.github_username }}">GitHub</a></li>
+  </ul>
+</section>
