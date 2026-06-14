@@ -498,71 +498,46 @@
       margin-left: 4px;
     }
 
-    #lb {
-      position: fixed;
-      inset: 0;
-      z-index: 300;
-      background: rgba(20, 16, 12, .86);
-      backdrop-filter: blur(7px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    #lb.open {
-      display: flex;
-    }
-
-    #lb .box {
+    .reel .player-wrap {
       position: relative;
-      width: min(94vw, 380px);
-      height: min(86vh, 680px);
-      background: #000;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
     }
 
-    #lb iframe {
+    .reel .reel-player {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 9/16;
       border: 0;
+      border-radius: 3px;
+      display: block;
+      background: #000;
+      box-shadow: 0 12px 30px -12px rgba(27, 24, 20, .22);
     }
 
-    #lb .x {
+    .reel .close-reel {
       position: absolute;
-      top: -46px;
-      right: 0;
-      width: 38px;
-      height: 38px;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
       border: 0;
       border-radius: 50%;
-      background: rgba(255, 255, 255, .16);
-      color: #fff;
-      font-size: 22px;
+      background: rgba(255, 255, 255, .92);
+      color: var(--ink);
+      font-size: 15px;
       line-height: 1;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+      transition: background .2s;
     }
 
-    #lb .x:hover {
-      background: rgba(255, 255, 255, .28);
-    }
-
-    #lb .open-ig {
-      position: absolute;
-      bottom: -40px;
-      left: 0;
-      color: rgba(255, 255, 255, .85);
-      font-size: 12.5px;
-      letter-spacing: .04em;
-      text-decoration: underline;
+    .reel .close-reel:hover {
+      background: #fff;
     }
 
     @media print {
-
-      .reel .play,
-      #lb {
+      .reel .play {
         display: none !important;
       }
     }
@@ -1202,24 +1177,34 @@
     </div>
   </footer>
 
-  <div id="lb">
-    <div class="box"><button class="x" aria-label="close">✕</button><iframe id="lbFrame" src="about:blank"
-        allow="autoplay; encrypted-media; fullscreen" scrolling="no"></iframe><a id="lbIg" class="open-ig"
-        target="_blank" rel="noopener">Open on Instagram ↗</a></div>
-  </div>
-
   <script>
     const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }) }, { threshold: .14 });
     document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-    const lb = document.getElementById('lb'), lbf = document.getElementById('lbFrame'), lbig = document.getElementById('lbIg');
-    function openReel(url) { var u = url.replace(/embed\/?$/, ''); lbf.src = url; lbig.href = u; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function closeReel() { lb.classList.remove('open'); lbf.src = 'about:blank'; document.body.style.overflow = ''; }
-    document.querySelectorAll('.reel[data-reel]').forEach(function (r) {
-      r.addEventListener('click', function () { if (document.body.classList.contains('editing')) return; openReel(r.getAttribute('data-reel')); });
+    document.querySelectorAll('.reel[data-reel]').forEach(function(r) {
+      var fig = r.querySelector('figure');
+      fig.addEventListener('click', function() {
+        var url = r.getAttribute('data-reel');
+        var wrap = document.createElement('div');
+        wrap.className = 'player-wrap';
+        var iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.className = 'reel-player';
+        iframe.allow = 'autoplay; encrypted-media; fullscreen';
+        iframe.scrolling = 'no';
+        var btn = document.createElement('button');
+        btn.className = 'close-reel';
+        btn.innerHTML = '✕';
+        btn.setAttribute('aria-label', 'Close video');
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          wrap.replaceWith(fig);
+        });
+        wrap.appendChild(iframe);
+        wrap.appendChild(btn);
+        fig.replaceWith(wrap);
+      });
     });
-    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('x')) closeReel(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeReel(); });
   </script>
 </body>
 
