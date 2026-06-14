@@ -1,55 +1,1220 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
 
-<section class="hero">
-  <h1>Hi, I'm Heesun Kim.</h1>
-  <p class="lead">Welcome to my corner of the web — a place for what I'm working on and what I'm thinking about.</p>
-</section>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heesun Kim · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F4F0E8;
+      --paper2: #EFEAE0;
+      --ink: #1B1814;
+      --mut: #6F665B;
+      --line: #DAD3C5;
+      --accent: #B05B36;
+      --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --sans: 'Hanken Grotesk', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-<section id="about" class="section">
-  <h2>About</h2>
-  <p>
-    I'm Heesun Kim. <em>(Add a short bio here — who you are, what you do, and
-    what you care about. A couple of sentences is plenty.)</em>
-  </p>
-</section>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<section id="work" class="section">
-  <h2>Work &amp; Projects</h2>
-  <ul class="project-list">
-    <li>
-      <a href="#">Project One</a>
-      <span class="project-desc">A short, one-line description of the project.</span>
-    </li>
-    <li>
-      <a href="#">Project Two</a>
-      <span class="project-desc">What it is and why it matters.</span>
-    </li>
-    <li>
-      <a href="#">Project Three</a>
-      <span class="project-desc">Replace these with your real work.</span>
-    </li>
-  </ul>
-</section>
+    html {
+      scroll-behavior: smooth;
+    }
 
-<section id="writing" class="section">
-  <h2>Latest Writing</h2>
-  <ul class="post-list">
-    {% for post in site.posts limit:3 %}
-    <li>
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  <p><a href="{{ '/blog/' | relative_url }}">See all posts →</a></p>
-</section>
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-<section id="contact" class="section">
-  <h2>Contact &amp; Links</h2>
-  <ul class="links">
-    <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-    <li><a href="https://github.com/{{ site.github_username }}">GitHub</a></li>
-  </ul>
-</section>
+    ::selection {
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(22px, 5vw, 72px);
+    }
+
+    .label {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .label .n {
+      color: var(--mut);
+      margin-right: 14px;
+    }
+
+    .rule {
+      height: 1px;
+      background: var(--line);
+      border: 0;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 240, 232, .82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    nav .brand {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    nav .links {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav .links a {
+      font-size: 13px;
+      letter-spacing: .08em;
+      color: var(--mut);
+      transition: .2s;
+    }
+
+    nav .links a:hover {
+      color: var(--ink);
+    }
+
+    @media(max-width:640px) {
+      nav .links {
+        gap: 18px;
+      }
+
+      nav .links a:nth-child(2) {
+        display: none;
+      }
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: clamp(70px, 11vw, 150px) 0 clamp(54px, 8vw, 110px);
+    }
+
+    .hero .grid {
+      display: grid;
+      grid-template-columns: 1.55fr .95fr;
+      gap: clamp(28px, 5vw, 72px);
+      align-items: end;
+    }
+
+    .hero .eyebrow {
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(56px, 11vw, 142px);
+      line-height: .92;
+      letter-spacing: -.02em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero .role {
+      margin-top: 32px;
+      font-size: clamp(16px, 2vw, 21px);
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: .01em;
+      max-width: 30ch;
+    }
+
+    .hero .intro {
+      margin-top: 22px;
+      font-size: 16px;
+      color: var(--mut);
+      max-width: 42ch;
+      line-height: 1.7;
+    }
+
+    .hero .meta {
+      margin-top: 34px;
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+      letter-spacing: .06em;
+      color: var(--mut);
+      text-transform: uppercase;
+    }
+
+    .hero .meta b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero .portrait {
+      position: relative;
+    }
+
+    .hero .portrait img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: grayscale(.18);
+      box-shadow: 0 18px 44px -18px rgba(27, 24, 20, .28);
+    }
+
+    @media(max-width:820px) {
+      .hero .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .hero .portrait {
+        order: -1;
+        max-width: 260px;
+      }
+    }
+
+    /* ---- SECTION ---- */
+    section {
+      padding: clamp(64px, 9vw, 128px) 0;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1;
+      letter-spacing: -.01em;
+    }
+
+    /* ABOUT */
+    .about .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(30px, 5vw, 80px);
+    }
+
+    .about p {
+      font-size: clamp(18px, 2.1vw, 24px);
+      line-height: 1.55;
+      font-weight: 400;
+      letter-spacing: -.005em;
+    }
+
+    .about p+p {
+      margin-top: 22px;
+    }
+
+    .about .side {
+      font-size: 15px;
+      color: var(--mut);
+      line-height: 1.7;
+    }
+
+    .about .side strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .stats {
+      display: flex;
+      gap: clamp(28px, 5vw, 64px);
+      margin-top: 46px;
+      flex-wrap: wrap;
+    }
+
+    .stat .v {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 6vw, 62px);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .stat .k {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--mut);
+      margin-top: 10px;
+    }
+
+    @media(max-width:760px) {
+      .about .cols {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+
+    /* EXPERIENCE */
+    .xp .row {
+      display: grid;
+      grid-template-columns: 128px 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .xp .row:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .xp .yr {
+      font-size: 13px;
+      color: var(--mut);
+      letter-spacing: .04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .xp .role {
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .xp .role span {
+      font-weight: 400;
+      color: var(--mut);
+    }
+
+    .xp .note {
+      font-size: 13px;
+      color: var(--mut);
+      font-style: italic;
+    }
+
+    .xp .org {
+      font-size: 13.5px;
+      color: var(--mut);
+      text-align: right;
+      letter-spacing: .02em;
+    }
+
+    .edu {
+      margin-top: 42px;
+      display: flex;
+      gap: clamp(24px, 5vw, 60px);
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--mut);
+    }
+
+    .edu div b {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    @media(max-width:680px) {
+      .xp .row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .xp .org {
+        text-align: left;
+      }
+    }
+
+    /* WORK */
+    .feature {
+      margin-bottom: clamp(60px, 8vw, 110px);
+    }
+
+    .feature .topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .feature h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(26px, 3.6vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -.015em;
+      max-width: 18ch;
+    }
+
+    .feature .handle {
+      font-size: 13px;
+      letter-spacing: .06em;
+      color: var(--mut);
+      text-transform: uppercase;
+    }
+
+    .reels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2.2vw, 26px);
+    }
+
+    .reel figure {
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--paper2);
+    }
+
+    .reel img {
+      width: 100%;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.2, .7, .2, 1), filter .5s;
+      filter: grayscale(.05);
+    }
+
+    .reel:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0);
+    }
+
+    .reel figcaption {
+      margin-top: 12px;
+    }
+
+    .reel .t {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .reel .m {
+      font-size: 12.5px;
+      color: var(--mut);
+      margin-top: 3px;
+    }
+
+    .reel .m b {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .reel figure {
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 12px 30px -12px rgba(27, 24, 20, .22);
+      border-radius: 3px;
+    }
+
+    .reel .play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .92;
+      transition: opacity .25s;
+    }
+
+    .reel figure:hover .play {
+      opacity: 1;
+    }
+
+    .reel .play::before {
+      content: "";
+      width: clamp(40px, 4.4vw, 56px);
+      height: clamp(40px, 4.4vw, 56px);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 6px 20px rgba(20, 16, 12, .3);
+      transition: transform .25s;
+    }
+
+    .reel figure:hover .play::before {
+      transform: scale(1.1);
+    }
+
+    .reel .play::after {
+      content: "";
+      position: absolute;
+      border-left: clamp(13px, 1.5vw, 17px) solid var(--ink);
+      border-top: clamp(8px, .95vw, 11px) solid transparent;
+      border-bottom: clamp(8px, .95vw, 11px) solid transparent;
+      margin-left: 4px;
+    }
+
+    #lb {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(20, 16, 12, .86);
+      backdrop-filter: blur(7px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    #lb.open {
+      display: flex;
+    }
+
+    #lb .box {
+      position: relative;
+      width: min(94vw, 380px);
+      height: min(86vh, 680px);
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+    }
+
+    #lb iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    #lb .x {
+      position: absolute;
+      top: -46px;
+      right: 0;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .16);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    #lb .x:hover {
+      background: rgba(255, 255, 255, .28);
+    }
+
+    #lb .open-ig {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      color: rgba(255, 255, 255, .85);
+      font-size: 12.5px;
+      letter-spacing: .04em;
+      text-decoration: underline;
+    }
+
+    @media print {
+
+      .reel .play,
+      #lb {
+        display: none !important;
+      }
+    }
+
+    .fstats {
+      display: flex;
+      gap: clamp(26px, 5vw, 60px);
+      margin-top: 38px;
+      flex-wrap: wrap;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .fstat .v {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(30px, 4.4vw, 46px);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .fstat .k {
+      font-size: 11.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--mut);
+      margin-top: 8px;
+    }
+
+    .partner {
+      margin-top: 34px;
+      font-size: 15px;
+      color: var(--mut);
+      line-height: 1.6;
+      max-width: 62ch;
+      border-left: 2px solid var(--accent);
+      padding-left: 18px;
+    }
+
+    .partner b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .eeb {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #9a9286;
+    }
+
+    @media(max-width:560px) {
+      .reels {
+        gap: 10px;
+      }
+
+      .reel .t {
+        font-size: 12.5px;
+      }
+
+      .reel .m {
+        font-size: 11px;
+      }
+    }
+
+    /* project rows */
+    .proj {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 5vw, 72px);
+      align-items: center;
+      padding: clamp(40px, 6vw, 72px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .proj.flip .media {
+      order: 2;
+    }
+
+    .proj .media {
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--paper2);
+      box-shadow: 0 12px 30px -12px rgba(27, 24, 20, .22);
+    }
+
+    .proj .media img {
+      width: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .proj:hover .media img {
+      transform: scale(1.03);
+    }
+
+    .proj .media.stack {
+      display: grid;
+      gap: 14px;
+      overflow: visible;
+      background: none;
+      box-shadow: none;
+    }
+
+    .proj .media.stack img {
+      border-radius: 3px;
+      box-shadow: 0 12px 30px -12px rgba(27, 24, 20, .22);
+    }
+
+    .proj .num {
+      font-family: var(--serif);
+      font-size: 15px;
+      color: var(--accent);
+    }
+
+    .proj h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(24px, 3.2vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.015em;
+      margin: 10px 0 6px;
+    }
+
+    .proj .meta {
+      font-size: 12.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--mut);
+      margin-bottom: 20px;
+    }
+
+    .proj ul {
+      list-style: none;
+    }
+
+    .proj li {
+      font-size: 15.5px;
+      color: #39342d;
+      line-height: 1.6;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 11px;
+    }
+
+    .proj li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .proj li b {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    @media(max-width:760px) {
+      .proj {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .proj.flip .media {
+        order: 0;
+      }
+    }
+
+    /* CONTACT */
+    .contact {
+      padding-bottom: clamp(70px, 9vw, 130px);
+    }
+
+    .contact h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(44px, 9vw, 108px);
+      line-height: .95;
+      letter-spacing: -.02em;
+    }
+
+    .contact h2 em {
+      font-style: italic;
+    }
+
+    .contact .links {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      max-width: 760px;
+    }
+
+    .contact .links a {
+      background: var(--paper);
+      padding: 22px 26px;
+      transition: .25s;
+    }
+
+    .contact .links a:hover {
+      background: var(--paper2);
+    }
+
+    .contact .links .k {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--mut);
+    }
+
+    .contact .links .v {
+      font-size: 17px;
+      font-weight: 500;
+      margin-top: 7px;
+      letter-spacing: -.01em;
+      word-break: break-word;
+    }
+
+    @media(max-width:560px) {
+      .contact .links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--mut);
+      letter-spacing: .04em;
+    }
+
+    /* reveal */
+    .rv {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .rv {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* hero load stagger */
+    .hero .anim {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards;
+    }
+
+    .hero .a1 {
+      animation-delay: .05s
+    }
+
+    .hero .a2 {
+      animation-delay: .16s
+    }
+
+    .hero .a3 {
+      animation-delay: .27s
+    }
+
+    .hero .a4 {
+      animation-delay: .38s
+    }
+
+    .hero .a5 {
+      animation-delay: .49s
+    }
+
+    .hero .a6 {
+      animation-delay: .30s
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ---- PRINT / PDF ---- */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      html {
+        scroll-behavior: auto;
+      }
+
+      body {
+        font-size: 11pt;
+      }
+
+      .wrap {
+        padding-left: 15mm;
+        padding-right: 15mm;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .rv {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .hero {
+        padding: 34px 0 30px;
+      }
+
+      .hero .grid {
+        grid-template-columns: 1.5fr .9fr;
+        gap: 34px;
+        align-items: center;
+      }
+
+      .hero .portrait {
+        order: 0;
+        max-width: none;
+      }
+
+      .hero .portrait img {
+        filter: grayscale(.18);
+      }
+
+      .hero h1 {
+        font-size: 74px;
+      }
+
+      section {
+        padding: 30px 0;
+        break-inside: auto;
+      }
+
+      .sec-head {
+        margin-bottom: 24px;
+      }
+
+      .about p {
+        font-size: 18px;
+      }
+
+      .feature,
+      .proj,
+      .contact .links,
+      .hero .grid,
+      .reel,
+      .xp .row,
+      .stat,
+      .fstat,
+      .edu {
+        break-inside: avoid;
+      }
+
+      #work,
+      #contact {
+        break-before: page;
+      }
+
+      .feature {
+        margin-bottom: 30px;
+      }
+
+      .proj {
+        padding: 26px 0;
+      }
+
+      .contact h2 {
+        font-size: 66px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      footer {
+        break-inside: avoid;
+      }
+
+      .proj .media,
+      .proj .media.stack img,
+      .reel figure,
+      .hero .portrait img {
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a href="#top" class="brand">Heesun&nbsp;Kim</a>
+      <div class="links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="label eyebrow anim a1">Portfolio <span style="color:var(--mut)">— 2026</span></div>
+          <h1><span class="anim a2">Heesun</span><br><span class="anim a3"><em>Kim</em></span></h1>
+          <p class="role anim a4">Marketing &amp; Content Strategy · PR &amp; Branding · APAC Growth</p>
+          <p class="intro anim a5">A marketing &amp; content professional with 11+ years across luxury hospitality,
+            global tech, and B2B — now building a fast-growing Korean F&amp;B &amp; lifestyle channel in Singapore.</p>
+          <div class="meta anim a5">
+            <span><b>Singapore PR</b> · work-authorised</span>
+            <span><b>EN</b> / <b>KR</b> bilingual</span>
+          </div>
+        </div>
+        <div class="portrait anim a6">
+          <img src="images/profile.webp" alt="Heesun Kim">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="label"><span class="n">01</span>About</span></div>
+      <div class="cols">
+        <div class="rv">
+          <p>I turn audience insight into measurable growth — across content, PR, branding, and digital campaigns.</p>
+          <p>From luxury hotel PR across Marriott &amp; Accor brands to Samsung’s regional digital operations, and now a
+            Reels-first content channel of my own, I work where <em>storytelling</em> meets performance.</p>
+        </div>
+        <div class="side rv">
+          <p>Eleven-plus years spanning <strong>Marriott &amp; Accor hospitality</strong>, <strong>Cheil /
+              Samsung</strong>, and <strong>KOTRA</strong> — with an <strong>MSc in Communication Management
+              (SMU)</strong> and a recent <strong>Google AI Professional Certificate</strong>.</p>
+          <div class="stats">
+            <div class="stat">
+              <div class="v">62K+</div>
+              <div class="k">Monthly&nbsp;Reach</div>
+            </div>
+            <div class="stat">
+              <div class="v">3.2%</div>
+              <div class="k">Engagement</div>
+            </div>
+            <div class="stat">
+              <div class="v">$309K</div>
+              <div class="k">PR&nbsp;Media&nbsp;Value</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="label"><span class="n">02</span>Selected&nbsp;Work</span></div>
+
+      <!-- FEATURED -->
+      <div class="feature rv">
+        <div class="topline">
+          <h3>Singapore F&amp;B &amp; lifestyle content</h3>
+          <span class="handle">@wheretogoinsg · Content Creator · 2025—Present</span>
+        </div>
+        <div class="reels">
+          <div class="reel" data-reel="https://www.instagram.com/reel/DSALWpmCRHJ/embed">
+            <figure><img src="images/reel_baesikdang.webp" alt="Bae Sik Dang reel"><span class="play"></span></figure>
+            <figcaption>
+              <div class="t">Bae Sik Dang — Tanjong Pagar</div>
+              <div class="m"><b>7.8K</b> views · 52 saves · 102 shares</div>
+            </figcaption>
+          </div>
+          <div class="reel" data-reel="https://www.instagram.com/reel/DYvaG7LyGRC/embed">
+            <figure><img src="images/reel_visitors.webp" alt="Visitors cafe reel"><span class="play"></span></figure>
+            <figcaption>
+              <div class="t">Visitors — Seongsu-style café</div>
+              <div class="m"><b>7.4K</b> views · 45 saves · giveaway</div>
+            </figcaption>
+          </div>
+          <div class="reel" data-reel="https://www.instagram.com/reel/DSlcca_CWx9/embed">
+            <figure><img src="images/reel_christmas.webp" alt="Christmas on Orchard reel"><span class="play"></span>
+            </figure>
+            <figcaption>
+              <div class="t">Christmas on Orchard Rd</div>
+              <div class="m"><b>7.1K</b> views · 213 likes · 86 shares</div>
+            </figcaption>
+          </div>
+        </div>
+        <div class="fstats">
+          <div class="fstat">
+            <div class="v">22K+</div>
+            <div class="k">Views · 3 reels</div>
+          </div>
+          <div class="fstat">
+            <div class="v">17.5K+</div>
+            <div class="k">Accounts reached</div>
+          </div>
+          <div class="fstat">
+            <div class="v">200+</div>
+            <div class="k">Shares</div>
+          </div>
+          <div class="fstat">
+            <div class="v">+39</div>
+            <div class="k">New followers</div>
+          </div>
+        </div>
+        <p class="partner">Reels-first F&amp;B &amp; lifestyle content with <b>brand partnerships</b> — new Korean
+          restaurants, cafés &amp; local F&amp;B, plus health &amp; lifestyle brands, including hosted launches and
+          giveaway campaigns (e.g. Bae Sik Dang, Visitors).</p>
+        <p class="eeb">Also co-founder, eebsing.com — early-stage Korea × SG lifestyle platform.</p>
+      </div>
+
+      <!-- 02 SAMSUNG -->
+      <div class="proj rv">
+        <div class="media stack">
+          <img src="images/samsung_site.webp" alt="Samsung.com">
+          <img src="images/samsung_cloud.webp" alt="Samsung Marketing Cloud">
+        </div>
+        <div>
+          <div class="num">02</div>
+          <h3>Samsung digital marketing &amp; Marketing Cloud</h3>
+          <div class="meta">Cheil Worldwide (Samsung) · Singapore · 2022—2023</div>
+          <ul>
+            <li>Managed Samsung.com publishing across SEAO, driving a <b>+30% increase in SEO traffic</b>.</li>
+            <li>Spearheaded <b>Samsung Marketing Cloud</b> adoption, boosting engagement <b>+25%</b>.</li>
+            <li>Aligned regional SEO strategy with HQ, shared-service &amp; local teams.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 03 KOTRA -->
+      <div class="proj flip rv">
+        <div class="media"><img src="images/asean.webp" alt="Korea-ASEAN Summit"></div>
+        <div>
+          <div class="num">03</div>
+          <h3>B2B market-entry strategy for Korean SMEs</h3>
+          <div class="meta">KOTRA · Singapore · 2018—2020</div>
+          <ul>
+            <li>Enabled <b>B2B matching for 120+ Korean SMEs</b> entering Singapore.</li>
+            <li>Won a <b>Top 10 Research Paper Award</b> among 127 global branches.</li>
+            <li>Official delegate at the <b>2018 Korea–ASEAN Summit</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 04 LOCCITANE -->
+      <div class="proj rv">
+        <div class="media"><img src="images/loccitane.webp" alt="Provence Spa by L'Occitane"></div>
+        <div>
+          <div class="num">04</div>
+          <h3>Brand PR &amp; media — Korea’s first L’Occitane spa</h3>
+          <div class="meta">JW Marriott Dongdaemun Square Seoul · 2017</div>
+          <ul>
+            <li>Built the media &amp; influencer strategy defining the brand’s core message.</li>
+            <li>Achieved a <b>+150% increase in media exposure</b>, securing <b>50+ coverages</b>.</li>
+            <li>Established the spa as a premium wellness destination.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 05 TWO BELLMEN -->
+      <div class="proj flip rv">
+        <div class="media"><img src="images/twobellmen.webp" alt="Two Bellmen 3"></div>
+        <div>
+          <div class="num">05</div>
+          <h3>Two Bellmen 3 — brand-film premiere</h3>
+          <div class="meta">JW Marriott (Marriott International) · 2017</div>
+          <ul>
+            <li>Led the Korea premiere campaign for Marriott’s flagship brand film.</li>
+            <li>Secured <b>$309,588 in earned media value</b> and <b>1,000+ coverages</b>.</li>
+            <li>Elevated luxury branding across Asia — <b>911M+ YouTube views</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="label"><span class="n">03</span>Contact</span></div>
+      <h2 class="rv">Get in <em>touch</em>.</h2>
+      <div class="links rv">
+        <a href="mailto:heesun.kim.2020@mcm.smu.edu.sg">
+          <div class="k">Email</div>
+          <div class="v">heesun.kim.2020@mcm.smu.edu.sg</div>
+        </a>
+        <a href="https://www.linkedin.com/in/shirleyhsk" target="_blank" rel="noopener">
+          <div class="k">LinkedIn</div>
+          <div class="v">linkedin.com/in/shirleyhsk</div>
+        </a>
+        <a href="https://www.instagram.com/wheretogoinsg" target="_blank" rel="noopener">
+          <div class="k">Instagram</div>
+          <div class="v">@wheretogoinsg</div>
+        </a>
+        <a href="tel:+6590352485">
+          <div class="k">Mobile</div>
+          <div class="v">+65 9035 2485</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Heesun Kim</span>
+      <span>Singapore · Marketing &amp; Content</span>
+    </div>
+  </footer>
+
+  <div id="lb">
+    <div class="box"><button class="x" aria-label="close">✕</button><iframe id="lbFrame" src="about:blank"
+        allow="autoplay; encrypted-media; fullscreen" scrolling="no"></iframe><a id="lbIg" class="open-ig"
+        target="_blank" rel="noopener">Open on Instagram ↗</a></div>
+  </div>
+
+  <script>
+    const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }) }, { threshold: .14 });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+    const lb = document.getElementById('lb'), lbf = document.getElementById('lbFrame'), lbig = document.getElementById('lbIg');
+    function openReel(url) { var u = url.replace(/embed\/?$/, ''); lbf.src = url; lbig.href = u; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeReel() { lb.classList.remove('open'); lbf.src = 'about:blank'; document.body.style.overflow = ''; }
+    document.querySelectorAll('.reel[data-reel]').forEach(function (r) {
+      r.addEventListener('click', function () { if (document.body.classList.contains('editing')) return; openReel(r.getAttribute('data-reel')); });
+    });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('x')) closeReel(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeReel(); });
+  </script>
+</body>
+
+</html>
