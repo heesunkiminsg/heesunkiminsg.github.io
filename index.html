@@ -708,84 +708,72 @@
       }
     }
 
-    /* CONTACT — namecard */
+    /* CONTACT */
     .contact {
       padding-bottom: clamp(70px, 9vw, 130px);
     }
 
-    .contact .card {
-      max-width: 500px;
-      background: var(--paper2);
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      padding: clamp(30px, 4.5vw, 48px) clamp(26px, 4vw, 44px);
-      box-shadow: 0 6px 28px -6px rgba(27, 24, 20, .1);
-    }
-
-    .contact .card-top {
-      margin-bottom: 22px;
-    }
-
-    .contact .card-name {
+    .contact h2 {
       font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(42px, 7.5vw, 88px);
+      line-height: .95;
+      letter-spacing: -.025em;
+    }
+
+    .contact h2 em {
+      font-style: italic;
       font-weight: 400;
-      font-size: clamp(22px, 3vw, 30px);
-      letter-spacing: -.01em;
-      line-height: 1.1;
-      color: var(--ink);
     }
 
-    .contact .card-role {
-      margin-top: 6px;
-      font-size: 12.5px;
-      color: var(--mut);
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-
-    .contact .card-rule {
-      height: 1px;
+    .contact .links {
+      margin-top: 52px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
       background: var(--line);
-      margin-bottom: 0;
+      border: 1px solid var(--line);
+      max-width: 840px;
     }
 
-    .contact .card-list {
-      list-style: none;
+    .contact .links a {
+      background: var(--paper);
+      padding: 26px 28px;
+      transition: background .2s;
     }
 
-    .contact .card-list li {
-      border-bottom: 1px solid var(--line);
+    .contact .links a:hover {
+      background: var(--paper2);
     }
 
-    .contact .card-list a {
-      display: flex;
-      align-items: baseline;
-      gap: clamp(14px, 2.5vw, 28px);
-      padding: 14px 0;
-      cursor: pointer;
-      transition: color .2s;
-    }
-
-    .contact .card-list a:hover .cv {
+    .contact .links a:hover .lv {
       color: var(--accent);
     }
 
-    .contact .ck {
-      font-size: 10px;
+    .contact .links .lk {
+      font-size: 10.5px;
       font-weight: 600;
-      letter-spacing: .2em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--mut);
-      min-width: 68px;
-      flex-shrink: 0;
     }
 
-    .contact .cv {
-      font-size: 14px;
+    .contact .links .lv {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(15px, 1.8vw, 19px);
+      margin-top: 10px;
+      letter-spacing: -.01em;
+      line-height: 1.3;
       color: var(--ink);
-      letter-spacing: -.005em;
+      word-break: break-word;
       transition: color .2s;
-      word-break: break-all;
+    }
+
+    @media(max-width:680px) {
+      .contact .links {
+        grid-template-columns: 1fr;
+      }
     }
 
     footer {
@@ -1168,32 +1156,20 @@
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="sec-head rv"><span class="label"><span class="n">03</span>Contact</span></div>
-      <div class="card rv">
-        <div class="card-top">
-          <div class="card-name">Heesun Kim</div>
-          <div class="card-role">Marketing &amp; Content Strategy · Singapore</div>
-        </div>
-        <div class="card-rule"></div>
-        <ul class="card-list">
-          <li>
-            <a href="mailto:heesun.kim.2020@mcm.smu.edu.sg">
-              <span class="ck">Email</span>
-              <span class="cv">heesun.kim.2020@mcm.smu.edu.sg</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/shirleyhsk" target="_blank" rel="noopener">
-              <span class="ck">LinkedIn</span>
-              <span class="cv">linkedin.com/in/shirleyhsk</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/wheretogoinsg" target="_blank" rel="noopener">
-              <span class="ck">Instagram</span>
-              <span class="cv">@wheretogoinsg</span>
-            </a>
-          </li>
-        </ul>
+      <h2 class="rv">Get in <em>touch.</em></h2>
+      <div class="links rv">
+        <a href="mailto:heesun.kim.2020@mcm.smu.edu.sg">
+          <div class="lk">Email</div>
+          <div class="lv">heesun.kim.2020@mcm.smu.edu.sg</div>
+        </a>
+        <a href="https://www.linkedin.com/in/shirleyhsk" target="_blank" rel="noopener">
+          <div class="lk">LinkedIn</div>
+          <div class="lv">linkedin.com/in/shirleyhsk</div>
+        </a>
+        <a href="https://www.instagram.com/wheretogoinsg" target="_blank" rel="noopener">
+          <div class="lk">Instagram</div>
+          <div class="lv">@wheretogoinsg</div>
+        </a>
       </div>
     </div>
   </section>
